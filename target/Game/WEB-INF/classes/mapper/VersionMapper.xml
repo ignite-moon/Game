@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.VersionMapper">
+
+    <select id="selectAll" resultType="com.ssm.pojo.Version">
+        select * from version
+    </select>
+
+    <insert id="insert" parameterType="com.ssm.pojo.Version">
+        <!--#{id}中id为User的属性名 -->
+        insert into version (edtion,desc,date) values (#{edition},#{desc},#{date})
+    </insert>
+
+    <delete id="deleteByEdition" parameterType="string">
+        delete from version where edition=#{edition}
+    </delete>
+
+    <update id="updateByEdition" parameterType="com.ssm.pojo.Version">
+        update version
+        <set>
+            <if test="edition != null">
+                edition = #{edition},
+            </if>
+            <if test="desc != null">
+                desc = #{desc},
+            </if>
+            <if test="date != null" >
+                date = #{date},
+            </if>
+        </set>
+        where edition = #{edition}
+    </update>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.CharactersMapper">
+    <select id="selectAll" resultType="com.ssm.pojo.Characters">
+        select * from characters
+    </select>
+
+    <insert id="insert" parameterType="com.ssm.pojo.Characters">
+        <!--#{id}中id为User的属性名 -->
+        insert into characters (name,sex,birthday,borderline,attribution,fate,weapon,aptitude) values (#{name},#{sex},#{birthday},#{borderline},#{attribution},#{fate},#{weapon},#{aptitude})
+    </insert>
+
+    <delete id="deleteByName" parameterType="string">
+        delete from characters where name=#{name}
+    </delete>
+
+    <update id="updateByName" parameterType="com.ssm.pojo.Characters">
+        update characters
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sex != sex">
+                sex = #{sex},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday},
+            </if>
+            <if test="borderline != null" >
+                borderline = #{borderline},
+            </if>
+            <if test="attribution != null" >
+                attribution = #{attribution},
+            </if>
+            <if test="fate != null" >
+                fate = #{fate},
+            </if>
+            <if test="weapon != null" >
+                weapon = #{weapon},
+            </if>
+            <if test="aptitude != null" >
+                aptitude = #{aptitude},
+            </if>
+        </set>
+        where name = #{name}
+    </update>
+
+    <select id="selectByName" resultType="com.ssm.pojo.Characters">
+        select * from  characters where name=#{name}
+    </select>
+
+</mapper>

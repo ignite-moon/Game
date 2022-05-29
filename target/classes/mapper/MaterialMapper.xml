@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.MaterialMapper">
+
+    <select id="selectAll" resultType="com.ssm.pojo.Material">
+        select * from material
+    </select>
+
+    <insert id="insert" parameterType="com.ssm.pojo.Material">
+        <!--#{id}中id为User的属性名 -->
+        insert into material (name,access,purpose) values (#{name},#{access},#{purpose})
+    </insert>
+
+    <delete id="deleteByName" parameterType="string">
+        delete from material where name=#{name}
+    </delete>
+
+    <update id="updateByName" parameterType="com.ssm.pojo.Material">
+        update material
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="access != null">
+                access = #{access},
+            </if>
+            <if test="purpose != null" >
+                purpose = #{purpose},
+            </if>
+        </set>
+        where name = #{name}
+    </update>
+
+</mapper>
